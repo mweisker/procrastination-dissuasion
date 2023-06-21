@@ -3,7 +3,7 @@
 const App = () => {
   return (
     <div>
-      Look at me now!
+      <h1>Look at me right now!</h1>
     </div>
   )
 }
