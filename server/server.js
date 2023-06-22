@@ -12,7 +12,7 @@ const userController = require('./controllers/userController');
 const PORT = 3000;
 
 
-app.use(express.json());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use('/', express.static(path.join(__dirname, '../assets')));
@@ -24,7 +24,7 @@ app.post('/register', userController.newUser, (req, res) => {
   return res.status(200).json(res.locals.newUser);
 })
 
-app.get('/login', userController.findUser, (req, res) => {
+app.post('/login', userController.findUser, (req, res) => {
   return res.status(200).json(res.locals.result)
 })
 

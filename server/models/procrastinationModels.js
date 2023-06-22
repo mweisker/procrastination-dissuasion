@@ -18,8 +18,8 @@ module.exports = {
 
 CREATE TABLE Users (
   UserId SERIAL PRIMARY KEY,
-  UserName varchar,
-  Password varchar
+  UserName varchar NOT NULL,
+  Password varchar NOT NULL
 );
 
 CREATE TABLE Tasks (

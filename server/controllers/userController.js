@@ -4,6 +4,7 @@ const db = require('../models/procrastinationModels');
 const userController = {};
 
 userController.newUser = async (req, res, next) => {
+  console.log(req.body);
   const { UserName, Password } = req.body;
   console.log('invoking new user with a username of ', UserName)
 
@@ -15,8 +16,8 @@ userController.newUser = async (req, res, next) => {
     `;
     const params = [ UserName, Password ];
     const result = await db.query(text, params);
-    console.log('result ', result);
-    res.locals.newUser = result;
+    console.log('result ', result.rows[0]);
+    res.locals.newUser = result.rows[0];
     return next();
   } catch (err) {
     next({
@@ -38,8 +39,8 @@ userController.findUser = async (req, res, next) => {
     `;
     const params = [ UserName, Password ];
     const result = await db.query(text, params);
-    console.log('result ', result);
-    res.locals.result = result;
+    console.log('result ', result.rowCount);
+    res.locals.result = result.rowCount;
     return next();
   } catch (err) {
     next({
