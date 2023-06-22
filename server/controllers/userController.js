@@ -39,8 +39,12 @@ userController.findUser = async (req, res, next) => {
     `;
     const params = [ UserName, Password ];
     const result = await db.query(text, params);
-    console.log('result ', result.rowCount);
-    res.locals.result = result.rowCount;
+    console.log('result ', result.rows[0]);
+    if (!result.rows[0]) return next({
+      log: 'User does not exist',
+      message: { err: 'Username or Password was not found in database'}
+    })
+    res.locals.result = result.rows[0];
     return next();
   } catch (err) {
     next({
