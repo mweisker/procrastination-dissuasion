@@ -6,7 +6,7 @@ export default function MainPage() {
   const navigate = useNavigate();
   return (
     <div>
-      <h1>Here is the main page</h1>
+      <h1>PROCRASTINATION DISSUASION</h1>
       <button onClick={() => navigate('/')}>Log out</button>
     </div>
   )
