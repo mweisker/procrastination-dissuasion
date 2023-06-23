@@ -10,6 +10,7 @@ const taskRouter = require('./routes/task');
 const cookieController = require('./controllers/cookieController');
 const taskController = require('./controllers/taskController');
 const userController = require('./controllers/userController');
+const { verifyCookie } = require('./controllers/cookieController');
 
 const PORT = 3000;
 
@@ -32,6 +33,10 @@ app.post('/login', userController.findUser, cookieController.setCookie, (req, re
 })
 
 app.use('/task', taskRouter);
+
+app.get('/main-page', cookieController.verifyCookie, (req, res) => {
+  res.sendFile(path.join(__dirname, '../build', 'index.html'));
+})
 
 // serve index.html on the route '/'
 app.get('*', (req, res) => {
