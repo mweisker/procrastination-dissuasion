@@ -16,15 +16,23 @@ export default function MainPage() {
 
   return (
     <div className='main-div'>
-      <h1>Here is the sign in page</h1>
-      <h2>{ !login ? 'Register' : 'Sign in to'} your account</h2>
-      { login ? <Login /> : <Register /> }
-      <h2>or { login ? 'register' : 'sign in'}</h2>
-      <button onClick={toggleLogin}>{ login ? 'Register' : 'Sign in'}</button>
+      <h1>Welcome to Procrastination Dissuasion</h1>
+      <h2>Never forget about a project again</h2>
+      <div className='welcome-form'>
+        <div className='signin-div left'>
+          <h2>{ !login ? 'Register' : 'Sign in to'} your account</h2>
+          { login ? <Login /> : <Register /> }
+        </div>
+        <div className='seperator'></div>
+        <div className='signin-div right'>
+        <h2>or { login ? 'register' : 'sign in'}</h2>
+        <button onClick={toggleLogin}>{ login ? 'Register' : 'Sign in'}</button>
+        </div>
+      </div>
 
-      <br></br>
+      {/* <br></br>
       <h3>Automatic sign in for ease</h3>
-      <button onClick={() => navigate('/main-page')}>Sign in</button>
+      <button onClick={() => navigate('/main-page')}>Sign in</button> */}
     </div>
   )
 }

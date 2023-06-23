@@ -89,18 +89,19 @@ export default function MainPage(props) {
           <img className='logo' src='https://culturedecanted.files.wordpress.com/2015/04/white-rabbit-closeup.jpg?w=640'/>
       </div>
       < TaskForm setNewData={setNewData} userId={userId} />
-      <h1>Task Display</h1>
-      { (taskData.length === 0) ? <div>You don't have any tasks yet</div> : null}
-      { taskData.map((data, i) => (
-        < TaskDisplay taskData={data} setNewData={setNewData} key={`TaskDisplay#${i}`} />
-      ))}
-      <label>Sort by: </label>
+      <div className='task-display-container'>
+        { (taskData.length === 0) ? <h3>You don't have any tasks yet</h3> : null}
+        { taskData.map((data, i) => (
+          < TaskDisplay taskData={data} setNewData={setNewData} key={`TaskDisplay#${i}`} />
+        ))}
+      </div>
+      <label className='sort-label'>Sort by: </label>
       <select id="sort" value={sort} onChange={handleSort}>
         <option value="dueDate">Due Date</option>
         <option value="title">Title</option>
         <option value="status">Status</option>
       </select>
-      <button onClick={() => navigate('/')}>Log out</button>
+      <button className='home' onClick={() => navigate('/')}>Home</button>
     </div>
   )
 }

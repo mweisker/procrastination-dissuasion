@@ -63,8 +63,8 @@ const taskEdit = (props) => {
 
 
   return (
-    <form className="task-form" onSubmit={handleSubmit}>
-      <div>
+    <form className="task-form task-display" onSubmit={handleSubmit}>
+      <div className="task-title task-container">
         <label htmlFor="title">Title:</label>
         <input
           type="text"
@@ -73,7 +73,15 @@ const taskEdit = (props) => {
           onChange={handleTitleChange}
         />
       </div>
-      <div>
+      <div className="task-status task-container">
+      <label htmlFor="status">State:</label>
+      <select id="status" value={status} onChange={handleStatusChange}>
+        <option value="In Progress">In Progress</option>
+        <option value="Completed">Completed</option>
+        <option value="Given Up">Given Up</option>
+      </select>
+    </div>
+    <div className="task-description task-container">
         <label htmlFor="description">Description:</label>
         <input
           type="text"
@@ -82,16 +90,8 @@ const taskEdit = (props) => {
           onChange={handleDescriptionChange}
         />
       </div>
-      <div>
-      <label htmlFor="status">Select an option:</label>
-      <select id="status" value={status} onChange={handleStatusChange}>
-        <option value="In Progress">In Progress</option>
-        <option value="Completed">Completed</option>
-        <option value="Given Up">Given Up</option>
-      </select>
-    </div>
-    <div>
-        <label htmlFor="dueDate">Select a Date:</label>
+    <div className="task-due-date task-container">
+        <label htmlFor="dueDate">Due Date:</label>
         <DatePicker
           id="dueDate"
           selected={dueDate}
@@ -100,8 +100,10 @@ const taskEdit = (props) => {
           placeholderText="Select a date"
         />
       </div>
-      <button type="submit">Save changes</button>
-      <button onClick={handleDiscardChanges} >Discard changes</button>
+      <div className="task-options">
+        <button type="submit">Save changes</button>
+        <button onClick={handleDiscardChanges} >Discard changes</button>
+      </div>
     </form>
   );
 };

@@ -37,28 +37,51 @@ const taskDisplay = ({ taskData, setNewData }) => {
     setEditTask(true);
   }
 
+  let border = '#FFFFFF';
+
+  if (status === 'Completed') {
+    border = '#50c878';
+  } else if (status === 'Given Up') {
+    border = '#899499'
+  } else if (differenceDays === 1) {
+    border = '#FAFA33'
+  } else if (differenceDays === 0) {
+    border = '#E0115F'
+  }
 
 
   return (
     <div>
-      { !editTask ? <div>
-        <div>
-        Title: {title}
+      { !editTask ? <div style={{border: `1px solid ${border}` }} className="task-display">
+        <div className="task-title task-container">
+          <h4>Title:</h4>
+          <p>{title}</p>
+        {/* Title: {title} */}
         </div>
-        <div>
-        Description: {description}
+        <div className="task-status task-container">
+          <h4>Status:</h4>
+          <p>{status}</p>
+        {/* Status: {status} */}
         </div>
-        <div>
-        Status: {status}
+        <div className="task-description task-container">
+          <h4>Description:</h4>
+          <p>{description}</p>
+        {/* Description: {description} */}
         </div>
-        <div>
-        Due Date: {readableDate}  
+        <div className="task-due-date task-container">
+          <h4>Due Date:</h4>
+          <p>{readableDate}</p>
+        {/* Due Date: {readableDate}   */}
         </div>
-        <div>
-        Days left: {differenceDays}  
+        <div className="task-days-left task-container">
+          <h4>Days Left:</h4>
+          <p>{differenceDays}</p>
+        {/* Days left: {differenceDays}   */}
         </div>
-        <button onClick={handleEdit} >Edit</button>
-        <button onClick={handleDelete} >Delete</button>
+        <div className="task-options">
+          <button onClick={handleEdit} >Edit</button>
+          <button onClick={handleDelete} >Delete</button>
+        </div>
       </div>  : <div>
         < TaskEdit setEditTask={setEditTask} taskData={taskData} />
       </div> }
