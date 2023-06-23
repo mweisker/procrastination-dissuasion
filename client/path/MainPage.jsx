@@ -29,18 +29,13 @@ export default function MainPage(props) {
       if (result.status === 400) return alert('An error ocurred')
       const parsedResult = await result.json();
 
-      console.log(parsedResult);
 
       let sortedResult;
 
       if (sort === 'dueDate') {
         sortedResult = parsedResult.sort((a, b) => {
-          console.log(a);
-          console.log(b)
           const aDate = new Date(a.duedate);
           const bDate = new Date(b.duedate);
-          console.log(aDate);
-          console.log(bDate);
           return aDate - bDate;
         })
       } else if (sort === 'title') {
@@ -56,14 +51,10 @@ export default function MainPage(props) {
         sortedResult = parsedResult.sort((a, b) => {
           const aValue = order[a.status];
           const bValue = order[b.status];
-          console.log(aValue);
-          console.log(bValue);
           return aValue - bValue;
 
         })
       }
-
-      console.log(sortedResult)
 
       setTaskData(parsedResult);
       setNewData(false);
@@ -72,7 +63,6 @@ export default function MainPage(props) {
   }, [newData])
 
   const handleSort = (event) => {
-    console.log(event.target.value);
     setSort(event.target.value);
     setNewData(true);
   }
