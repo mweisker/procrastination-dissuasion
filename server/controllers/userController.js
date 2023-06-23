@@ -4,9 +4,7 @@ const db = require('../models/procrastinationModels');
 const userController = {};
 
 userController.newUser = async (req, res, next) => {
-  console.log(req.body);
   const { UserName, Password } = req.body;
-  console.log('invoking new user with a username of ', UserName)
 
   try {
     const saltRounds = 10; // number of salt rounds for bcrypt to generate
@@ -22,8 +20,6 @@ userController.newUser = async (req, res, next) => {
       });
     });
 
-    console.log('hashedPassword:', hashedPassword);
-
     const text = `
       INSERT INTO Users (UserName, Password)
       VALUES ($1, $2)
@@ -31,7 +27,6 @@ userController.newUser = async (req, res, next) => {
     `;
     const params = [ UserName, hashedPassword ];
     const result = await db.query(text, params);
-    console.log('result ', result.rows[0]);
     res.locals.result = result.rows[0];
     return next();
   } catch (err) {
@@ -44,7 +39,6 @@ userController.newUser = async (req, res, next) => {
 
 userController.findUser = async (req, res, next) => {
   const { UserName, Password } = req.body;
-  console.log('invoking find user with a username of ', UserName)
 
   try {
     const text = `
@@ -54,7 +48,6 @@ userController.findUser = async (req, res, next) => {
     `;
     const params = [UserName];
     const result = await db.query(text, params);
-    console.log('result ', result.rows[0]);
 
     if (!result.rows[0]) {
       return next({

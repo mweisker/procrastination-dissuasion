@@ -24,9 +24,6 @@ const login = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Perform any necessary validation or submit the form data
-    // to the server using an API call.
-    // For simplicity, this example just logs the form data.
     if (username === '' || password === '') return alert('Excuse me, how are we going to find your information if you don\'t fill out the form completely?')
     const postFetchOptions = {
       method: 'POST',
@@ -40,9 +37,6 @@ const login = (props) => {
         const findUser = await fetch('/login', postFetchOptions);
         if (findUser.status === 400) return alert('Username or Password does not exist, take a deep breath and try again.  Or if you forgot your login information, just register as a new user.  We don\'t change passwords here')
         const parsedResult = await findUser.json();
-        console.log('parsed ', parsedResult);
-        // const userData = { userId: parsedResult.userid, userName: parsedResult.username };
-        // props.setUserInfo(userData);
         navigate('/main-page');
         
       } catch (err) {

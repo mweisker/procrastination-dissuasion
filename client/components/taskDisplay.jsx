@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import DatePicker from 'react-datepicker';
-import './taskForm.scss';
-
+import TaskEdit from '../components/taskEdit.jsx';
 
 const taskDisplay = ({ taskData, setNewData }) => {
+  const [editTask, setEditTask] = useState(false);
 
   const { title, description, status, duedate, taskid } = taskData
 
@@ -20,10 +19,11 @@ const taskDisplay = ({ taskData, setNewData }) => {
     day: 'numeric'
   })
 
-  console.log(readableDate)
+  useEffect(() => {
+    if (editTask === false) setNewData(true);
+  }, [editTask])
 
   const handleDelete = async () => {
-    console.log(taskData)
     const deleted = await fetch(`/task/${taskid}`, {
       method: 'DELETE',
       headers: {
@@ -33,28 +33,35 @@ const taskDisplay = ({ taskData, setNewData }) => {
     setNewData(true);
   }
 
+  const handleEdit = () => {
+    setEditTask(true);
+  }
+
 
 
   return (
     <div>
-      <div>
-      Title: {title}
-      </div>
-      <div>
-      Description: {description}
-      </div>
-      <div>
-      Status: {status}
-      </div>
-      <div>
-      Due Date: {readableDate}  
-      </div>
-      <div>
-      Days left: {differenceDays}  
-      </div>
-      <button>Edit</button>
-      <button onClick={handleDelete} >Delete</button>
-      <br></br>
+      { !editTask ? <div>
+        <div>
+        Title: {title}
+        </div>
+        <div>
+        Description: {description}
+        </div>
+        <div>
+        Status: {status}
+        </div>
+        <div>
+        Due Date: {readableDate}  
+        </div>
+        <div>
+        Days left: {differenceDays}  
+        </div>
+        <button onClick={handleEdit} >Edit</button>
+        <button onClick={handleDelete} >Delete</button>
+      </div>  : <div>
+        < TaskEdit setEditTask={setEditTask} taskData={taskData} />
+      </div> }
 
     </div>
   );

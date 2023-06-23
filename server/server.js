@@ -2,6 +2,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+require('dotenv').config();
 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -12,7 +13,7 @@ const taskController = require('./controllers/taskController');
 const userController = require('./controllers/userController');
 const { verifyCookie } = require('./controllers/cookieController');
 
-const PORT = 3000;
+const PORT = process.env.PORT;
 
 
 app.use(bodyParser.json());

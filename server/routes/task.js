@@ -15,10 +15,17 @@ router.post('/',
   (req, res) => res.status(200).json(res.locals.newTask)
 );
 
+router.patch('/:id', 
+  taskController.updateTask,
+  (req, res) => res.status(200).json(res.locals)
+)
+
+
 router.delete('/:id',
   taskController.deleteTask,
   (req, res) => res.status(200).json(res.locals.deleted)
 ) 
+
 
 
 module.exports = router;

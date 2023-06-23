@@ -29,9 +29,6 @@ const login = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Perform any necessary validation or submit the form data
-    // to the server using an API call.
-    // For simplicity, this example just logs the form data.
     if (username === '' || password === '' || confirmPassword === '') return alert('Excuse me, how are we going to register you if you don\'t even give us all the information?')
     else if (password !== confirmPassword) return alert('Your passwords didn\'t match.  I know it\'s hard when you can\'t see the letters but please try again.')
     const postFetchOptions = {
@@ -46,9 +43,6 @@ const login = (props) => {
         const postUser = await fetch('/register', postFetchOptions);
         if (postUser.status === 400) return alert('I\'m afraid that password has already been chosen, you\'ll have to be a bit more creative I\'m afraid')
         const parsedResult = await postUser.json();
-        console.log('parsed ', parsedResult);
-        // const userData = { userId: parsedResult.userid, userName: parsedResult.username };
-        // props.setUserInfo(userData);
         navigate('/main-page');
         
       } catch (err) {

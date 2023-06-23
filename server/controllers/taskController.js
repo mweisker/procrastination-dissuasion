@@ -3,7 +3,6 @@ const db = require('../models/procrastinationModels');
 const taskController = {};
 
 taskController.newTask = async (req, res, next) => {
-  console.log('new task invoked');
   const { Title, Description, Status, DueDate, UserId } = req.body;
   try {
     const text = `
@@ -13,7 +12,6 @@ taskController.newTask = async (req, res, next) => {
     `
     const params = [Title, Description, Status, DueDate, UserId]
     const result = await db.query(text, params);
-    console.log(result);
     res.locals.newTask = result.rows[0];
     return next();
 
@@ -26,7 +24,6 @@ taskController.newTask = async (req, res, next) => {
 }
 
 taskController.getTasks = async (req, res, next) => {
-  console.log('get Tasks invoked');
   const { id } = req.params;
   try {
     const text = `
@@ -36,7 +33,6 @@ taskController.getTasks = async (req, res, next) => {
     `;
     const params = [ id ];
     const result = await db.query(text, params);
-    console.log(result.rows);
     res.locals.allTasks = result.rows;
     return next();
   } catch (err) {
@@ -47,8 +43,30 @@ taskController.getTasks = async (req, res, next) => {
   }
 }
 
+taskController.updateTask = async (req, res, next) => {
+  const { id } = req.params;
+  const { Title, Description, Status, DueDate } = req.body;
+
+  try {
+    const text = `
+      UPDATE Tasks
+      SET Title = $1, Description = $2, Status = $3, DueDate = $4
+      WHERE TaskId = $5
+    `;
+    const params = [ Title, Description, Status, DueDate, id ];
+    const result = await db.query(text, params);
+    const updated = { updated: 'updated'};
+    res.locals.updated = updated;
+    return next();
+  } catch (err) {
+    next({
+      log: `taskController.updateTask: ERROR: ${err}`,
+      message: { err: 'Error occured in taskController.updateTask.  Check server logs for more details.'}
+    })
+  }
+}
+
 taskController.deleteTask = async (req, res, next) => {
-  console.log('delete task invoked');
   const { id } = req.params;
   try {
     const text = `
@@ -57,7 +75,6 @@ taskController.deleteTask = async (req, res, next) => {
     `
     const params = [ id ];
     const result = await db.query(text, params);
-    console.log(result);
     let deleted = false;
     if (result.rowCount) deleted = true;
     res.locals.deleted = deleted;
