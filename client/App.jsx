@@ -5,15 +5,18 @@ import MainPage from './path/MainPage.jsx';
 
 
 const App = () => {
-  const [userInfo, setUserInfo] = useState({userId: null, userName: null});
+  // const [userInfo, setUserInfo] = useState({userId: null, userName: null});
   return (
     <div>
       <Routes>
-        <Route path='/' element={ <SignIn setUserInfo={setUserInfo} />} />
-        <Route path='/main-page' element={ <MainPage userInfo={userInfo}/>} />
+        <Route path='/' element={ <SignIn />} />
+        <Route path='/main-page' element={ <MainPage />} />
       </Routes>
     </div>
   )
 }
 
 export default App;
+
+{/* <Route path='/' element={ <SignIn setUserInfo={setUserInfo} />} />
+<Route path='/main-page' element={ <MainPage userInfo={userInfo}/>} /> */}

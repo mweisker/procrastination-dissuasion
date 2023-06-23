@@ -47,8 +47,8 @@ const login = (props) => {
         if (postUser.status === 400) return alert('I\'m afraid that password has already been chosen, you\'ll have to be a bit more creative I\'m afraid')
         const parsedResult = await postUser.json();
         console.log('parsed ', parsedResult);
-        const userData = { userId: parsedResult.userid, userName: parsedResult.username };
-        props.setUserInfo(userData);
+        // const userData = { userId: parsedResult.userid, userName: parsedResult.username };
+        // props.setUserInfo(userData);
         navigate('/main-page');
         
       } catch (err) {

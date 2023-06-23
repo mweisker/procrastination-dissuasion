@@ -4,6 +4,7 @@ const app = express();
 const path = require('path');
 
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const taskRouter = require('./routes/task');
 
 const cookieController = require('./controllers/cookieController');
@@ -14,18 +15,19 @@ const PORT = 3000;
 
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.use('/', express.static(path.join(__dirname, '../assets')));
 
 // statically serve everything in the build folder on the route '/build'
 app.use('/build', express.static(path.join(__dirname, '../build')));
 
-app.post('/register', userController.newUser, (req, res) => {
-  return res.status(200).json(res.locals.newUser);
+app.post('/register', userController.newUser, cookieController.setCookie, (req, res) => {
+  return res.status(200).json(res.locals.result);
 })
 
-app.post('/login', userController.findUser, (req, res) => {
+app.post('/login', userController.findUser, cookieController.setCookie, (req, res) => {
   return res.status(200).json(res.locals.result)
 })
 

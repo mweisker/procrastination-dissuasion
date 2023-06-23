@@ -41,8 +41,8 @@ const login = (props) => {
         if (findUser.status === 400) return alert('Username or Password does not exist, take a deep breath and try again.  Or if you forgot your login information, just register as a new user.  We don\'t change passwords here')
         const parsedResult = await findUser.json();
         console.log('parsed ', parsedResult);
-        const userData = { userId: parsedResult.userid, userName: parsedResult.username };
-        props.setUserInfo(userData);
+        // const userData = { userId: parsedResult.userid, userName: parsedResult.username };
+        // props.setUserInfo(userData);
         navigate('/main-page');
         
       } catch (err) {

@@ -4,7 +4,7 @@ import Register from '../components/register.jsx';
 
 import { useNavigate } from 'react-router-dom';
 
-export default function MainPage(props) {
+export default function MainPage() {
   const [login, setLogin] = useState(true);
 
   const toggleLogin = () => {
@@ -18,7 +18,7 @@ export default function MainPage(props) {
     <div>
       <h1>Here is the sign in page</h1>
       <h2>{ !login ? 'Register' : 'Sign in to'} your account</h2>
-      { login ? <Login setUserInfo={props.setUserInfo} /> : <Register setUserInfo={props.setUserInfo} /> }
+      { login ? <Login /> : <Register /> }
       <h2>or { login ? 'register' : 'sign in'}</h2>
       <button onClick={toggleLogin}>{ login ? 'Register' : 'Sign in'}</button>
 

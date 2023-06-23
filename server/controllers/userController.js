@@ -17,7 +17,7 @@ userController.newUser = async (req, res, next) => {
     const params = [ UserName, Password ];
     const result = await db.query(text, params);
     console.log('result ', result.rows[0]);
-    res.locals.newUser = result.rows[0];
+    res.locals.result = result.rows[0];
     return next();
   } catch (err) {
     next({
