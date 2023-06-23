@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import TaskForm from '../components/taskForm.jsx';
 import TaskDisplay from '../components/taskDisplay.jsx';
 import getCookie from '../util/getCookie.js';
+import deleteCookie from '../util/deleteCookie.js'
 
 import { useNavigate } from 'react-router-dom';
 
@@ -67,6 +68,11 @@ export default function MainPage(props) {
     setNewData(true);
   }
 
+  const handleLogOut = () => {
+    deleteCookie('user');
+    navigate('/');
+  }
+
   const navigate = useNavigate();
 
   return (
@@ -91,7 +97,7 @@ export default function MainPage(props) {
         <option value="title">Title</option>
         <option value="status">Status</option>
       </select>
-      <button className='home' onClick={() => navigate('/')}>Home</button>
+      <button className='home' onClick={handleLogOut}>Log Out</button>
     </div>
   )
 }

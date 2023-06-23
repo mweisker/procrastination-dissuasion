@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Login from '../components/login.jsx';
 import Register from '../components/register.jsx';
+import getCookie from '../util/getCookie.js';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -30,9 +31,7 @@ export default function MainPage() {
         </div>
       </div>
 
-      {/* <br></br>
-      <h3>Automatic sign in for ease</h3>
-      <button onClick={() => navigate('/main-page')}>Sign in</button> */}
+      {/* { cookie ? <button onClick={() => navigate('/main-page')}>Sign in</button> : null} */}
     </div>
   )
 }
