@@ -53,6 +53,10 @@ const taskForm = (props) => {
         const parsedResult = await addTask.json();
         console.log('parsed ', parsedResult);
         props.setNewData(true);
+        setTitle('');
+        setDescription('');
+        setStatus('In Progress');
+        setDueDate(null);
         // const userData = { userId: parsedResult.userid, userName: parsedResult.username };
         // props.setUserInfo(userData);
         // navigate('/main-page');

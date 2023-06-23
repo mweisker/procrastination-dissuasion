@@ -3,9 +3,9 @@ import DatePicker from 'react-datepicker';
 import './taskForm.scss';
 
 
-const taskDisplay = ({ taskData }) => {
+const taskDisplay = ({ taskData, setNewData }) => {
 
-  const { title, description, status, duedate } = taskData
+  const { title, description, status, duedate, taskid } = taskData
 
   const dueDateObject = new Date(duedate);
 
@@ -21,6 +21,17 @@ const taskDisplay = ({ taskData }) => {
   })
 
   console.log(readableDate)
+
+  const handleDelete = async () => {
+    console.log(taskData)
+    const deleted = await fetch(`/task/${taskid}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+    setNewData(true);
+  }
 
 
 
@@ -41,6 +52,8 @@ const taskDisplay = ({ taskData }) => {
       <div>
       Days left: {differenceDays}  
       </div>
+      <button>Edit</button>
+      <button onClick={handleDelete} >Delete</button>
       <br></br>
 
     </div>

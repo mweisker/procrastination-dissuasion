@@ -39,7 +39,7 @@ export default function MainPage(props) {
       < TaskForm setNewData={setNewData} userId={userId} />
       <h1>Task Display</h1>
       { taskData.map(data => (
-        < TaskDisplay taskData={data} />
+        < TaskDisplay taskData={data} setNewData={setNewData} />
       ))}
       <br></br>
       <button onClick={() => navigate('/')}>Log out</button>

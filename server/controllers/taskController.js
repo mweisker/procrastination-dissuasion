@@ -47,4 +47,27 @@ taskController.getTasks = async (req, res, next) => {
   }
 }
 
+taskController.deleteTask = async (req, res, next) => {
+  console.log('delete task invoked');
+  const { id } = req.params;
+  try {
+    const text = `
+      DELETE FROM Tasks
+      WHERE TaskId = $1
+    `
+    const params = [ id ];
+    const result = await db.query(text, params);
+    console.log(result);
+    let deleted = false;
+    if (result.rowCount) deleted = true;
+    res.locals.deleted = deleted;
+    return next();
+  } catch (err) {
+    next({
+      log: `taskController.deleteTask: ERROR: ${err}`,
+      message: { err: 'Error occured in taskController.deleteTask.  Check server logs for more details.'}
+    })
+  }
+}
+
 module.exports = taskController;
