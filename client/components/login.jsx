@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
+
 
 const login = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -12,14 +16,18 @@ const login = (props) => {
     setPassword(event.target.value);
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleSubmit(event);
+    }
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     // Perform any necessary validation or submit the form data
     // to the server using an API call.
     // For simplicity, this example just logs the form data.
-    console.log("Username:", username);
-    console.log("Password:", password);
-    if (username === '' || password === '') alert('Excuse me, how are we going to find your information if you don\'t fill out the form completely?')
+    if (username === '' || password === '') return alert('Excuse me, how are we going to find your information if you don\'t fill out the form completely?')
     const postFetchOptions = {
       method: 'POST',
       headers: {
@@ -30,12 +38,12 @@ const login = (props) => {
     const findUser = async () => {
       try {
         const findUser = await fetch('/login', postFetchOptions);
-        console.log(findUser);
-        if (findUser.status === 400) alert('Username or Password does not exist, take a deep breath and try again.  Or if you forgot your login information, just register as a new user.  We don\'t change passwords here')
+        if (findUser.status === 400) return alert('Username or Password does not exist, take a deep breath and try again.  Or if you forgot your login information, just register as a new user.  We don\'t change passwords here')
         const parsedResult = await findUser.json();
         console.log('parsed ', parsedResult);
         const userData = { userId: parsedResult.userid, userName: parsedResult.username };
         props.setUserInfo(userData);
+        navigate('/main-page');
         
       } catch (err) {
         console.log(`Error in findUser: ${err}`)
@@ -63,6 +71,7 @@ const login = (props) => {
           id="loginPassword"
           value={password}
           onChange={handlePasswordChange}
+          onKeyDown={handleKeyDown}
         />
       </div>
       <button type="submit">Submit</button>

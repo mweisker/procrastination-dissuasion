@@ -1,3 +1,4 @@
+
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -29,9 +30,13 @@ app.post('/login', userController.findUser, (req, res) => {
 })
 
 // serve index.html on the route '/'
-app.get('/', (req, res) => {
-  return res.status(200).sendFile(path.join(__dirname, '../index.html'));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
+
+app.use((req, res) => {
+  res.status(400).send('404 not found')
+})
 
 app.use((err, req, res, next) => {
   const defaultErr = {
@@ -50,3 +55,4 @@ app.listen(PORT, () => {
 }); //listens on port 3000 -> http://localhost:3000/
 
 module.exports = app;
+

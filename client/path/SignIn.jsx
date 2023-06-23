@@ -17,10 +17,10 @@ export default function MainPage(props) {
   return (
     <div>
       <h1>Here is the sign in page</h1>
-      <h2>Sign in to your account</h2>
+      <h2>{ !login ? 'Register' : 'Sign in to'} your account</h2>
       { login ? <Login setUserInfo={props.setUserInfo} /> : <Register setUserInfo={props.setUserInfo} /> }
-      <h2>Or register</h2>
-      <button onClick={toggleLogin}>Register</button>
+      <h2>or { login ? 'register' : 'sign in'}</h2>
+      <button onClick={toggleLogin}>{ login ? 'Register' : 'Sign in'}</button>
 
       <br></br>
       <h3>Automatic sign in for ease</h3>

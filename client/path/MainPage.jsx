@@ -1,4 +1,5 @@
 import React from 'react';
+import TaskForm from '../components/taskForm.jsx'
 
 import { useNavigate } from 'react-router-dom';
 
@@ -13,6 +14,8 @@ export default function MainPage(props) {
       <h1>PROCRASTINATION DISSUASION</h1>
       <h2>{userId}</h2>
       <h2>{userName}</h2>
+      < TaskForm />
+      <br></br>
       <button onClick={() => navigate('/')}>Log out</button>
     </div>
   )

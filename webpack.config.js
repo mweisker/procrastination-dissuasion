@@ -21,10 +21,12 @@ module.exports = {
         }
       },
       {
-        test: /\.s[ac]ss/, //.sass or .scss 
-        use: [ 
-          "style-loader", 'css-loader', 'sass-loader'
-        ] 
+        test: /\.s[ac]ss$/, //.sass or .scss
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
       },
       {
         test: /\.(png|jpg|gif)$/i,
