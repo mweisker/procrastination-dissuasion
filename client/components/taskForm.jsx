@@ -52,7 +52,7 @@ const taskForm = (props) => {
 
   return (
     <form className="task-form" onSubmit={handleSubmit}>
-      <div>
+      <div className="input-section">
         <label htmlFor="title">Title:</label>
         <input
           type="text"
@@ -61,7 +61,7 @@ const taskForm = (props) => {
           onChange={handleTitleChange}
         />
       </div>
-      <div>
+      <div className="input-section">
         <label htmlFor="description">Description:</label>
         <input
           type="text"
@@ -70,16 +70,16 @@ const taskForm = (props) => {
           onChange={handleDescriptionChange}
         />
       </div>
-      <div>
-      <label htmlFor="status">Select an option:</label>
+      <div className="input-section">
+      <label htmlFor="status">State:</label>
       <select id="status" value={status} onChange={handleStatusChange}>
         <option value="In Progress">In Progress</option>
         <option value="Completed">Completed</option>
         <option value="Given Up">Given Up</option>
       </select>
     </div>
-    <div>
-        <label htmlFor="dueDate">Select a Date:</label>
+    <div className="input-section">
+        <label htmlFor="dueDate">Due Date:</label>
         <DatePicker
           id="dueDate"
           selected={dueDate}
@@ -87,8 +87,12 @@ const taskForm = (props) => {
           dateFormat="dd/MM/yyyy"
           placeholderText="Select a date"
         />
-      </div>
-      <button type="submit">Submit</button>
+    </div>
+    <div className="input-section">
+      <label>Submit</label>
+      <button type="submit"></button>
+
+    </div>
     </form>
   );
 };

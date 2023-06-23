@@ -15,7 +15,7 @@ export default function MainPage() {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div className='main-div'>
       <h1>Here is the sign in page</h1>
       <h2>{ !login ? 'Register' : 'Sign in to'} your account</h2>
       { login ? <Login /> : <Register /> }

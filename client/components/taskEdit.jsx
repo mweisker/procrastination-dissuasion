@@ -8,7 +8,6 @@ const taskEdit = (props) => {
   const [dueDate, setDueDate] = useState(null);
 
   useEffect(() => {
-    console.log(props.taskData)
     const { title, description, status, duedate } = props.taskData;
     setTitle(title);
     setDescription(description);

@@ -1,7 +1,87 @@
 @import '~react-datepicker/dist/react-datepicker.css';
 
+$tiffany-blue: #9AD2CB;
+$tea-green: #D7EBBA;
+$cream: #FEFFBE;
+$vanilla: #EBD494;
+$eggplant: #472836;
 
 body{
-  background-color: green;
-  font-family: "Comic Sans MS", "Copmic Sans", cursive;
+  background-color: $cream;
+  font-family: 'Tahoma', sans-serif;
+}
+
+form {
+  background-color: $tea-green;
+}
+
+.main-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70%;
+  margin: auto;
+}
+
+.welcome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  // background-color: #D7EBBA;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  h1 {
+    font-weight: bold;
+    font-size: 4vw;
+    font-family: luminari;
+  }
+}
+
+.logo-container {
+  height: 40%;
+}
+
+.logo {
+  width: 30%;
+  padding: 2vw 3vw 
+}
+
+.task-form {
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+  border-radius: 5px;
+  box-shadow: 0 0 5px $vanilla;
+}
+
+.input-section {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1vw;
+
+  label {
+    padding: 0.5vw;
+  }
+  button {
+    width: 1.5vw;
+    height: 1.5vw;
+    background-image: url('https://i.etsystatic.com/8344025/r/il/d0b177/4565043245/il_fullxfull.4565043245_l1m2.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 1.5vw;
+    border-radius: 50%;
+  }
+  button:hover {
+    cursor: pointer;
+    box-shadow: 0 0 5px $eggplant;
+  }
 }
