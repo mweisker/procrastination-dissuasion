@@ -37,38 +37,41 @@ const taskForm = (props) => {
     // Perform any necessary validation or submit the form data
     // to the server using an API call.
     // For simplicity, this example just logs the form data.
-    if (username === '' || password === '') return alert('Excuse me, how are we going to find your information if you don\'t fill out the form completely?')
+    if (title === '' || dueDate === null) return alert('How are you supposed to remember to do a task if you don\'t even have a title or due date?  It\'s hardly motivating if it\'s empty!')
     const postFetchOptions = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({UserName: username, Password: password})
+      body: JSON.stringify({Title: title, Description: description, Status: status, DueDate: dueDate, UserId: props.userId})
     }
-    const findUser = async () => {
+    console.log(postFetchOptions);
+    const addTask = async () => {
       try {
-        const findUser = await fetch('/login', postFetchOptions);
-        if (findUser.status === 400) return alert('Username or Password does not exist, take a deep breath and try again.  Or if you forgot your login information, just register as a new user.  We don\'t change passwords here')
-        const parsedResult = await findUser.json();
+        const addTask = await fetch('/task', postFetchOptions);
+        if (addTask.status === 400) return alert('Something is wrong')
+        const parsedResult = await addTask.json();
         console.log('parsed ', parsedResult);
-        const userData = { userId: parsedResult.userid, userName: parsedResult.username };
-        props.setUserInfo(userData);
-        navigate('/main-page');
+        props.setNewData(true);
+        // const userData = { userId: parsedResult.userid, userName: parsedResult.username };
+        // props.setUserInfo(userData);
+        // navigate('/main-page');
         
       } catch (err) {
-        console.log(`Error in findUser: ${err}`)
+        console.log(`Error in addTask: ${err}`)
       }
     }
-    findUser();
+    addTask();
   };
-  const date = new Date()
-  console.log(date);
-  console.log(dueDate);
+  // const date = new Date()
+  // console.log(date);
+  // console.log(dueDate);
 
-  const difference = dueDate - date;
-  const differenceDays = Math.ceil(difference / (1000 * 60 * 60 * 24));
+  // const difference = dueDate - date;
+  // const differenceDays = Math.ceil(difference / (1000 * 60 * 60 * 24));
 
-  console.log(differenceDays)
+  // console.log(differenceDays)
+  // console.log(props);
 
 
   return (

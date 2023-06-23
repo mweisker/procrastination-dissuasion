@@ -29,6 +29,8 @@ app.post('/login', userController.findUser, (req, res) => {
   return res.status(200).json(res.locals.result)
 })
 
+app.use('/task', taskRouter);
+
 // serve index.html on the route '/'
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../build', 'index.html'));
